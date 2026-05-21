@@ -1,103 +1,70 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f0f4f8;
-  color: #1a1a2e;
-  min-height: 100vh;
-}
-
-.page { max-width: 480px; margin: 0 auto; padding: 20px; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1a2e;min-height:100vh}
 
 /* AUTH */
-.auth-box {
-  background: white;
-  border-radius: 16px;
-  padding: 32px 24px;
-  margin-top: 60px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  text-align: center;
-}
-.auth-box h1 { font-size: 28px; margin-bottom: 6px; color: #6c63ff; }
-.subtitle { color: #888; margin-bottom: 24px; }
+#auth-page{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.auth-box{background:white;border-radius:20px;padding:36px 28px;width:100%;max-width:400px;box-shadow:0 8px 32px rgba(108,99,255,0.1)}
+.auth-logo{font-size:40px;text-align:center;margin-bottom:8px}
+.auth-box h1{text-align:center;font-size:26px;color:#6c63ff;margin-bottom:4px}
+.auth-subtitle{text-align:center;color:#999;font-size:14px;margin-bottom:24px}
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tab{flex:1;padding:10px;border:2px solid #e8e8ee;border-radius:10px;background:white;cursor:pointer;font-size:14px;color:#888;font-weight:500;transition:all 0.2s}
+.tab.active{border-color:#6c63ff;color:#6c63ff;background:#f5f4ff}
 
-#auth-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
-.tab {
-  flex: 1; padding: 10px; border: 2px solid #e0e0e0;
-  border-radius: 8px; background: white; cursor: pointer;
-  font-size: 15px; color: #666; transition: all 0.2s;
-}
-.tab.active { border-color: #6c63ff; color: #6c63ff; font-weight: 600; }
+input,select{width:100%;padding:12px 14px;border:1.5px solid #e8e8ee;border-radius:10px;font-size:14px;margin-bottom:12px;background:#fafafa;outline:none;color:#1a1a2e;transition:border 0.2s;font-family:'Segoe UI',sans-serif}
+input:focus,select:focus{border-color:#6c63ff;background:white}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-input, select {
-  width: 100%; padding: 12px 14px; border: 1.5px solid #e0e0e0;
-  border-radius: 10px; font-size: 15px; margin-bottom: 12px;
-  background: #fafafa; outline: none; transition: border 0.2s;
-}
-input:focus, select:focus { border-color: #6c63ff; background: white; }
+.btn-primary{width:100%;padding:13px;background:#6c63ff;color:white;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;transition:background 0.2s}
+.btn-primary:hover{background:#5a52e0}
+.msg{margin-top:10px;font-size:13px;color:#e74c3c;min-height:18px;text-align:center}
+.msg.success{color:#22c55e}
 
-.btn-primary {
-  width: 100%; padding: 13px; background: #6c63ff;
-  color: white; border: none; border-radius: 10px;
-  font-size: 16px; font-weight: 600; cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-primary:hover { background: #5a52e0; }
+/* MAIN */
+header{background:#6c63ff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.user-info{display:flex;align-items:center;gap:12px}
+.avatar{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.25);border:2px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:white;flex-shrink:0}
+.user-name{color:white;font-size:15px;font-weight:600}
+.user-hello{color:rgba(255,255,255,0.75);font-size:12px}
+.btn-logout{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);color:white;padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer}
+.btn-logout:hover{background:rgba(255,255,255,0.3)}
 
-.message { margin-top: 12px; font-size: 14px; color: #e74c3c; min-height: 20px; }
-.message.success { color: #27ae60; }
-
-/* HEADER */
-header {
-  display: flex; justify-content: space-between;
-  align-items: center; margin-bottom: 20px;
-}
-header h2 { font-size: 22px; color: #6c63ff; }
-.btn-logout {
-  padding: 8px 16px; border: 1.5px solid #e0e0e0;
-  border-radius: 8px; background: white; cursor: pointer;
-  font-size: 13px; color: #666;
-}
-.btn-logout:hover { border-color: #e74c3c; color: #e74c3c; }
+.container{max-width:480px;margin:0 auto;padding:16px}
 
 /* SOLDE */
-.solde-card {
-  background: linear-gradient(135deg, #6c63ff, #a855f7);
-  color: white; border-radius: 16px; padding: 24px;
-  text-align: center; margin-bottom: 20px;
-}
-.solde-label { font-size: 14px; opacity: 0.85; margin-bottom: 6px; }
-.solde-card h2 { font-size: 34px; font-weight: 700; margin-bottom: 16px; }
-.solde-details { display: flex; justify-content: center; gap: 24px; font-size: 13px; }
-.revenu { color: #a8ffce; }
-.depense { color: #ffb3b3; }
+.solde-card{background:#6c63ff;border-radius:16px;padding:28px 24px;text-align:center;margin-bottom:16px}
+.solde-label{color:rgba(255,255,255,0.8);font-size:13px;margin-bottom:8px}
+.solde-amount{color:white;font-size:38px;font-weight:700;margin-bottom:4px}
+.solde-mois{color:rgba(255,255,255,0.65);font-size:12px}
 
-/* FORM & LIST CARDS */
-.form-card, .liste-card {
-  background: white; border-radius: 16px;
-  padding: 20px; margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-}
-.form-card h3, .liste-card h3 {
-  margin-bottom: 16px; font-size: 17px; color: #333;
-}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.stat-card{background:white;border-radius:14px;padding:16px;border:0.5px solid #e8e8ee}
+.stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px}
+.green-bg{background:#f0fdf4}.red-bg{background:#fff1f2}
+.stat-label{font-size:12px;color:#999;margin-bottom:4px}
+.stat-val{font-size:18px;font-weight:700}
+.green{color:#22c55e}.red{color:#ef4444}
 
-/* TRANSACTIONS */
-.transaction {
-  display: flex; justify-content: space-between;
-  align-items: center; padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-.transaction:last-child { border-bottom: none; }
-.trans-info .trans-titre { font-weight: 600; font-size: 15px; }
-.trans-info .trans-cat { font-size: 12px; color: #999; margin-top: 2px; }
-.trans-right { display: flex; align-items: center; gap: 12px; }
-.trans-montant { font-weight: 700; font-size: 16px; }
-.trans-montant.revenu { color: #27ae60; }
-.trans-montant.depense { color: #e74c3c; }
-.btn-delete {
-  background: none; border: none; color: #ccc;
-  cursor: pointer; font-size: 18px; line-height: 1;
-}
-.btn-delete:hover { color: #e74c3c; }
-.vide { color: #aaa; font-size: 14px; text-align: center; padding: 20px 0; }
+/* CARD */
+.card{background:white;border-radius:16px;padding:20px;margin-bottom:16px;border:0.5px solid #e8e8ee}
+.card h3{font-size:15px;font-weight:600;margin-bottom:16px;color:#1a1a2e}
+
+/* TYPE TOGGLE */
+.type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.type-btn{padding:11px;border-radius:10px;border:1.5px solid #e8e8ee;font-size:13px;font-weight:600;cursor:pointer;background:white;color:#666;transition:all 0.2s}
+.active-green{background:#f0fdf4;border-color:#22c55e;color:#166534}
+.active-red{background:#fff1f2;border-color:#ef4444;color:#991b1b}
+
+/* HISTORIQUE */
+.trans-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:0.5px solid #f5f5f8}
+.trans-item:last-child{border-bottom:none}
+.trans-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.trans-info{flex:1;min-width:0}
+.trans-name{font-size:14px;font-weight:600;color:#1a1a2e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trans-cat{font-size:11px;color:#bbb;margin-top:2px}
+.trans-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.trans-amount{font-size:15px;font-weight:700}
+.btn-del{background:none;border:none;color:#ddd;cursor:pointer;font-size:20px;line-height:1;padding:2px}
+.btn-del:hover{color:#ef4444}
+.vide{text-align:center;color:#bbb;font-size:14px;padding:24px 0}
