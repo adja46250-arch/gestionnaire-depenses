@@ -1,84 +1,119 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gestionnaire de Dépenses</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>MonBudget</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- PAGE DE CONNEXION -->
-  <div id="auth-page" class="page">
+  <!-- PAGE CONNEXION -->
+  <div id="auth-page">
     <div class="auth-box">
-      <h1>💸 MonBudget</h1>
-      <p class="subtitle">Gérez vos finances simplement</p>
+      <div class="auth-logo">💸</div>
+      <h1>MonBudget</h1>
+      <p class="auth-subtitle">Gérez vos finances simplement</p>
 
-      <div id="auth-tabs">
-        <button class="tab active" onclick="showTab('login')">Connexion</button>
-        <button class="tab" onclick="showTab('register')">Inscription</button>
+      <div class="tabs">
+        <button class="tab active" id="tab-login" onclick="showTab('login')">Connexion</button>
+        <button class="tab" id="tab-register" onclick="showTab('register')">Inscription</button>
       </div>
 
+      <!-- CONNEXION -->
       <div id="login-form">
-        <input type="email" id="login-email" placeholder="Email" />
-        <input type="password" id="login-password" placeholder="Mot de passe" />
+        <input type="email" id="login-email" placeholder="Adresse email"/>
+        <input type="password" id="login-password" placeholder="Mot de passe"/>
         <button class="btn-primary" onclick="login()">Se connecter</button>
       </div>
 
+      <!-- INSCRIPTION -->
       <div id="register-form" style="display:none">
-        <input type="email" id="reg-email" placeholder="Email" />
-        <input type="password" id="reg-password" placeholder="Mot de passe (min. 6 caractères)" />
-        <button class="btn-primary" onclick="register()">Créer un compte</button>
+        <div class="input-row">
+          <input type="text" id="reg-prenom" placeholder="Prénom"/>
+          <input type="text" id="reg-nom" placeholder="Nom"/>
+        </div>
+        <input type="email" id="reg-email" placeholder="Adresse email"/>
+        <input type="password" id="reg-password" placeholder="Mot de passe (min. 6 caractères)"/>
+        <button class="btn-primary" onclick="register()">Créer mon compte</button>
       </div>
 
-      <p id="auth-message" class="message"></p>
+      <p id="auth-msg" class="msg"></p>
     </div>
   </div>
 
   <!-- PAGE PRINCIPALE -->
-  <div id="main-page" class="page" style="display:none">
+  <div id="main-page" style="display:none">
+
+    <!-- HEADER -->
     <header>
-      <h2>💸 MonBudget</h2>
+      <div class="user-info">
+        <div class="avatar" id="user-avatar">?</div>
+        <div>
+          <div class="user-name" id="user-name">...</div>
+          <div class="user-hello">Bonjour 👋</div>
+        </div>
+      </div>
       <button class="btn-logout" onclick="logout()">Déconnexion</button>
     </header>
 
-    <!-- SOLDE -->
-    <div class="solde-card">
-      <p class="solde-label">Solde actuel</p>
-      <h2 id="solde">0 FCFA</h2>
-      <div class="solde-details">
-        <span class="revenu">▲ Revenus : <strong id="total-revenus">0</strong></span>
-        <span class="depense">▼ Dépenses : <strong id="total-depenses">0</strong></span>
-      </div>
-    </div>
+    <div class="container">
 
-    <!-- FORMULAIRE -->
-    <div class="form-card">
-      <h3>Ajouter une transaction</h3>
-      <input type="text" id="titre" placeholder="Ex: Salaire, Courses..." />
-      <input type="number" id="montant" placeholder="Montant (FCFA)" />
-      <select id="type">
-        <option value="revenu">💰 Revenu</option>
-        <option value="depense">💸 Dépense</option>
-      </select>
-      <select id="categorie">
-        <option value="Alimentation">🍽️ Alimentation</option>
-        <option value="Transport">🚗 Transport</option>
-        <option value="Salaire">💼 Salaire</option>
-        <option value="Loisirs">🎉 Loisirs</option>
-        <option value="Santé">🏥 Santé</option>
-        <option value="Autre">📦 Autre</option>
-      </select>
-      <button class="btn-primary" onclick="ajouterTransaction()">Ajouter</button>
-      <p id="form-message" class="message"></p>
-    </div>
-
-    <!-- LISTE -->
-    <div class="liste-card">
-      <h3>Historique</h3>
-      <div id="transactions-list">
-        <p class="vide">Aucune transaction pour l'instant.</p>
+      <!-- SOLDE -->
+      <div class="solde-card">
+        <div class="solde-label">Solde actuel</div>
+        <div class="solde-amount" id="solde">0 FCFA</div>
+        <div class="solde-mois" id="solde-mois"></div>
       </div>
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon green-bg">💰</div>
+          <div class="stat-label">Revenus</div>
+          <div class="stat-val green" id="total-revenus">0 FCFA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red-bg">💸</div>
+          <div class="stat-label">Dépenses</div>
+          <div class="stat-val red" id="total-depenses">0 FCFA</div>
+        </div>
+      </div>
+
+      <!-- FORMULAIRE -->
+      <div class="card">
+        <h3>➕ Nouvelle transaction</h3>
+
+        <div class="input-row">
+          <input type="text" id="titre" placeholder="Description (ex: Salaire)"/>
+          <input type="number" id="montant" placeholder="Montant (FCFA)"/>
+        </div>
+
+        <div class="type-toggle">
+          <button class="type-btn active-green" id="btn-revenu" onclick="setType('revenu')">💰 Revenu</button>
+          <button class="type-btn" id="btn-depense" onclick="setType('depense')">💸 Dépense</button>
+        </div>
+
+        <select id="categorie">
+          <option value="Salaire">💼 Salaire</option>
+          <option value="Alimentation">🍽️ Alimentation</option>
+          <option value="Transport">🚗 Transport</option>
+          <option value="Loisirs">🎉 Loisirs</option>
+          <option value="Santé">🏥 Santé</option>
+          <option value="Logement">🏠 Logement</option>
+          <option value="Autre">📦 Autre</option>
+        </select>
+
+        <button class="btn-primary" onclick="ajouterTransaction()">Ajouter la transaction</button>
+        <p id="form-msg" class="msg"></p>
+      </div>
+
+      <!-- HISTORIQUE -->
+      <div class="card">
+        <h3>📋 Historique des transactions</h3>
+        <div id="liste"></div>
+      </div>
+
     </div>
   </div>
 
