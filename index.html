@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestionnaire de Dépenses</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- PAGE DE CONNEXION -->
+  <div id="auth-page" class="page">
+    <div class="auth-box">
+      <h1>💸 MonBudget</h1>
+      <p class="subtitle">Gérez vos finances simplement</p>
+
+      <div id="auth-tabs">
+        <button class="tab active" onclick="showTab('login')">Connexion</button>
+        <button class="tab" onclick="showTab('register')">Inscription</button>
+      </div>
+
+      <div id="login-form">
+        <input type="email" id="login-email" placeholder="Email" />
+        <input type="password" id="login-password" placeholder="Mot de passe" />
+        <button class="btn-primary" onclick="login()">Se connecter</button>
+      </div>
+
+      <div id="register-form" style="display:none">
+        <input type="email" id="reg-email" placeholder="Email" />
+        <input type="password" id="reg-password" placeholder="Mot de passe (min. 6 caractères)" />
+        <button class="btn-primary" onclick="register()">Créer un compte</button>
+      </div>
+
+      <p id="auth-message" class="message"></p>
+    </div>
+  </div>
+
+  <!-- PAGE PRINCIPALE -->
+  <div id="main-page" class="page" style="display:none">
+    <header>
+      <h2>💸 MonBudget</h2>
+      <button class="btn-logout" onclick="logout()">Déconnexion</button>
+    </header>
+
+    <!-- SOLDE -->
+    <div class="solde-card">
+      <p class="solde-label">Solde actuel</p>
+      <h2 id="solde">0 FCFA</h2>
+      <div class="solde-details">
+        <span class="revenu">▲ Revenus : <strong id="total-revenus">0</strong></span>
+        <span class="depense">▼ Dépenses : <strong id="total-depenses">0</strong></span>
+      </div>
+    </div>
+
+    <!-- FORMULAIRE -->
+    <div class="form-card">
+      <h3>Ajouter une transaction</h3>
+      <input type="text" id="titre" placeholder="Ex: Salaire, Courses..." />
+      <input type="number" id="montant" placeholder="Montant (FCFA)" />
+      <select id="type">
+        <option value="revenu">💰 Revenu</option>
+        <option value="depense">💸 Dépense</option>
+      </select>
+      <select id="categorie">
+        <option value="Alimentation">🍽️ Alimentation</option>
+        <option value="Transport">🚗 Transport</option>
+        <option value="Salaire">💼 Salaire</option>
+        <option value="Loisirs">🎉 Loisirs</option>
+        <option value="Santé">🏥 Santé</option>
+        <option value="Autre">📦 Autre</option>
+      </select>
+      <button class="btn-primary" onclick="ajouterTransaction()">Ajouter</button>
+      <p id="form-message" class="message"></p>
+    </div>
+
+    <!-- LISTE -->
+    <div class="liste-card">
+      <h3>Historique</h3>
+      <div id="transactions-list">
+        <p class="vide">Aucune transaction pour l'instant.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
